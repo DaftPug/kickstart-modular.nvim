@@ -183,6 +183,9 @@ return {
             },
           },
         },
+        ansiblels = {
+          filetypes = { 'yaml', 'yml', 'yaml.ansible' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
