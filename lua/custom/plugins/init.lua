@@ -41,6 +41,9 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
+    keys = {
+      { '<leader>tt', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' },
+    },
   },
   {
     'folke/zen-mode.nvim',
@@ -50,7 +53,7 @@ return {
       -- refer to the configuration section below
     },
     keys = {
-      { '<leader>tz', '<cmd>ZenMode<cr>', desc = 'ZenMode' },
+      { '<leader>tz', '<cmd>ZenMode<cr>', desc = 'Toggle ZenMode' },
     },
   },
   {
@@ -218,17 +221,6 @@ return {
       -- see below for full list of options 👇
     },
   },
-  -- {
-  --   'nfrid/markdown-togglecheck',
-  --   dependencies = { 'nfrid/treesitter-utils' },
-  --   ft = { 'markdown' },
-  --   opts = {
-  --     -- toggle checked / create checkbox if it doesn't exist
-  --     vim.keymap.set('n', '<leader>nn', require('markdown-togglecheck').toggle, { desc = 'Toggle Checkmark' }),
-  --     -- toggle checkbox (it doesn't remember toggle state and always creates [ ])
-  --     vim.keymap.set('n', '<leader>nN', require('markdown-togglecheck').toggle_box, { desc = 'Toggle Checkbox' }),
-  --   },
-  -- },
   {
     'kdheepak/lazygit.nvim',
     cmd = {
@@ -247,5 +239,37 @@ return {
     keys = {
       { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
+  },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+  {
+    'yamatsum/nvim-cursorline',
+    config = function()
+      require('nvim-cursorline').setup {
+        cursorline = {
+          enable = true,
+          timeout = 1000,
+          number = false,
+        },
+        cursorword = {
+          enable = true,
+          min_length = 3,
+          hl = { underline = true },
+        },
+      }
+    end,
+  },
+  {
+    'willothy/moveline.nvim',
+    build = 'make',
+    config = function()
+      local moveline = require 'moveline'
+      vim.keymap.set('n', '<M-k>', moveline.up)
+      vim.keymap.set('n', '<M-j>', moveline.down)
+      vim.keymap.set('v', '<M-k>', moveline.block_up)
+      vim.keymap.set('v', '<M-j>', moveline.block_down)
+    end,
   },
 }
