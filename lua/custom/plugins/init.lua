@@ -272,4 +272,60 @@ return {
       vim.keymap.set('v', '<M-j>', moveline.block_down)
     end,
   },
+  {
+    'brianaung/yasl.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons', -- (optional) if you want icons
+    },
+    opts = {},
+  },
+  {
+    'max397574/better-escape.nvim',
+    config = function()
+      require('better_escape').setup()
+    end,
+  },
+  {
+    'roobert/surround-ui.nvim',
+    dependencies = {
+      'kylechui/nvim-surround',
+      'folke/which-key.nvim',
+    },
+    config = function()
+      require('surround-ui').setup {
+        root_key = 'S',
+      }
+    end,
+  },
+  {
+    'HiPhish/rainbow-delimiters.nvim',
+    config = function()
+      local rainbow_delimiters = require 'rainbow-delimiters'
+
+      ---@type rainbow_delimiters.config
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [''] = rainbow_delimiters.strategy['global'],
+          vim = rainbow_delimiters.strategy['local'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          lua = 'rainbow-blocks',
+        },
+        priority = {
+          [''] = 110,
+          lua = 210,
+        },
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
+      }
+    end,
+  },
 }
