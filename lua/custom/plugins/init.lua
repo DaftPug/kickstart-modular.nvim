@@ -277,7 +277,32 @@ return {
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- (optional) if you want icons
     },
-    opts = {},
+    opts = {
+
+      components = {
+        'mode',
+        ' ',
+        '%<%t%h%m%r%w', -- filename
+        ' ',
+        'branch',
+        ' ',
+        'gitdiff',
+        '%=',
+        'diagnostics',
+        ' ',
+        'filetype',
+        ' ',
+        '[%-8.(%l, %c%V%) %P]',
+        ' ',
+        {
+          events = { 'BufEnter', 'BufLeave' },
+          update = function()
+            return os.date('%H:%M', os.time())
+          end,
+        },
+        ' ',
+      },
+    },
   },
   {
     'max397574/better-escape.nvim',
@@ -324,6 +349,41 @@ return {
           'RainbowDelimiterGreen',
           'RainbowDelimiterViolet',
           'RainbowDelimiterCyan',
+        },
+      }
+    end,
+  },
+  {
+    'm4xshen/hardtime.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    opts = {},
+  },
+  {
+    'ggandor/leap.nvim',
+    config = function()
+      require('leap').create_default_mappings()
+    end,
+  },
+  {
+    'mrjones2014/legendary.nvim',
+    -- since legendary.nvim handles all your keymaps/commands,
+    -- its recommended to load legendary.nvim before other plugins
+    priority = 10000,
+    lazy = false,
+    -- sqlite is only needed if you want to use frecency sorting
+    -- dependencies = { 'kkharji/sqlite.lua' }
+    config = function()
+      require('legendary').setup {
+        extensions = { lazy_nvim = true },
+
+        keymaps = {
+          -- splits
+          { '<leader>|', ':vsplit<CR>', description = '[|] Vertical Split' },
+          { '<leader>-', ':split<CR>', description = '[-] Horizontal Split' },
+          -- buffers
+          { '<leader>bd', ':bdelete<CR>', description = '[B]uffer [D]elete' },
+          -- windows
+          { '<leader>wd', ':close<CR>', description = '[W]indow [C]lose' },
         },
       }
     end,
