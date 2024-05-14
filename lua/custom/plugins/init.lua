@@ -615,6 +615,9 @@ local colors = {
           { '<leader>bd', ':bdelete<CR>', description = '[B]uffer [D]elete' },
           -- windows
           { '<leader>wd', ':close<CR>', description = '[W]indow [C]lose' },
+          -- Tabbing
+          { '<Tab>', { n = '>>', v = '>gv' }, description = 'Tab line' },
+          { '<S-Tab>', { n = '<<', v = '<gv', i = '<C-\\><C-N><<<C-\\><C-N>^i' }, description = 'Shift Tab line' },
         },
       }
     end,
